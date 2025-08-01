@@ -1,20 +1,20 @@
 const admin = require("firebase-admin");
+const fs = require("fs");
 
+const serviceAccount = JSON.parse(
+  fs.readFileSync("firebase-service-account.json", "utf8")
+);
 
+// Initialize Firebase Admin
 if (!admin.apps.length) {
-  const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-
-  // Fix for multiline private key 
-  serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-
   });
 }
 
 const verifyFirebaseToken = async (req, res, next) => {
   const token = req.headers.authorization?.split("Bearer ")[1];
-  if (!token) return res.status(401).json({ error: "Unauthorized" });
+  if (!token) return res.status(401).json({ error: "Unauthorized, Login/SignIn Required" });
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(token);
@@ -22,7 +22,7 @@ const verifyFirebaseToken = async (req, res, next) => {
     next();
   } catch (err) {
     console.error("Firebase token verification failed:", err);
-    res.status(401).json({ error: "Unauthorized" });
+    res.status(401).json({ error: "Unauthorized Access" });
   }
 };
 

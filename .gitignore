@@ -65,6 +65,7 @@ videoapp/out/
 server/node_modules/
 server/.env
 server/dist/
+firebase-service-account.json
 
 # System/IDE files
 .DS_Store
