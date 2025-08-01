@@ -26,7 +26,7 @@ const app = express();
 const httpServer = createServer(app); 
 const allowedOrigins = [
   "http://localhost:3000",                  // Local dev
-  "https://your-tube-blue.vercel.app/"       
+  "https://vercel.com/mithlesh-mouryas-projects/frontend"       
 ];
 
 const io = new Server(httpServer, {
