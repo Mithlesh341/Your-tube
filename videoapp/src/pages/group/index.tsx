@@ -18,7 +18,7 @@ const socket = io(process.env.NEXT_PUBLIC_BACKEND_URL!, {
 });
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL;
+//const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL;
 
 interface Group {
   _id: string;
@@ -201,14 +201,14 @@ export default function GroupPage() {
                 <strong>Invite Link:</strong> {selectedInviteLink}
               </p>
               <p>
-                <strong>Paste Above link here:</strong> {FRONTEND_URL}/group
+                <strong>Paste Above link here:</strong> {window.location.origin}/group
               </p>
             </div>
 
             {/* Copy Button */}
             <Button
               onClick={() => {
-                const textToCopy = `Group Name: ${selectedGroupName}\nInvite Link: ${selectedInviteLink}\nPaste Above Link Here: ${FRONTEND_URL}/group`;
+                const textToCopy = `Group Name: ${selectedGroupName}\nInvite Link: ${selectedInviteLink}\nPaste Above Link Here: ${window.location.origin}/group`;
                 navigator.clipboard.writeText(textToCopy);
                 notify();
 
