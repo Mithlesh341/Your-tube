@@ -30,6 +30,11 @@ globalThis.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/group.js"
     ],
+    "/group/chat/[groupId]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/group/chat/[groupId].js"
+    ],
     "/watch/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
