@@ -26,7 +26,8 @@ const app = express();
 const httpServer = createServer(app); 
 const allowedOrigins = [
   "http://localhost:3000",                  // Local dev
-  "https://vercel.com/mithlesh-mouryas-projects/frontend"       
+  "https://vercel.com/mithlesh-mouryas-projects/frontend"   ,
+  "https://frontend-hvwk.onrender.com"    
 ];
 
 const io = new Server(httpServer, {
