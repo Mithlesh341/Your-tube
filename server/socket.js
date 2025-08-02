@@ -4,7 +4,7 @@ import Message from "./models/Message.js"; // adjust path if needed
 export const setupSocket = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: "*",
+      origin: "https://your-tube-blue.vercel.app",
       methods: ["GET", "POST"],
       credentials: true
     }
