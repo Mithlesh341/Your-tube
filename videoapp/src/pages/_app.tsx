@@ -5,14 +5,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { UserProvider, useUser } from "../lib/AuthContext";
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import SignInDialog from "@/components/SignInDialog";
 
 function AppContent({ Component, pageProps }: AppProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -45,7 +38,7 @@ function AppContent({ Component, pageProps }: AppProps) {
       </div>
 
       {/* Sign-In Modal */}
-      <Dialog open={!loading && !user}>
+      {/* <Dialog open={!loading && !user}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Sign in to continue</DialogTitle>
@@ -57,8 +50,8 @@ function AppContent({ Component, pageProps }: AppProps) {
             <Button onClick={handlegooglesignin}>Sign in with Google</Button>
           </div>
         </DialogContent>
-      </Dialog>
-
+      </Dialog> */}
+      <SignInDialog />
 
 
       
