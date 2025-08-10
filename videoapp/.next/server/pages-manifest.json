@@ -3,6 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/group/chat/[groupId]": "pages/group/chat/[groupId].js",
-  "/group": "pages/group.js"
+  "/watch/[id]": "pages/watch/[id].js",
+  "/group/chat/[groupId]": "pages/group/chat/[groupId].js"
 }

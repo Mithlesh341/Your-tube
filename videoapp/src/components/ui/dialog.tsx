@@ -129,7 +129,7 @@ function DialogDescription({
 
 export {
   Dialog,
-  DialogClose,
+ DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
