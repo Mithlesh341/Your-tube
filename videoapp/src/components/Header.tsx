@@ -160,7 +160,7 @@ const Header = ({ onToggleSidebar }: HeaderProps) => {
         ) : (
           <>
             <Button
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 cursor-pointer"
               onClick={handlegooglesignin}
             >
               <User className="w-4 h-4 cursor-pointer" />

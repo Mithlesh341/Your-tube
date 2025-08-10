@@ -16,12 +16,14 @@ import { useUser } from "@/lib/AuthContext";
 import Subscriptionplans from "./SubscribePlans";
 import axiosInstance from "@/lib/axiosinstance";
 
+
 interface VideoPlayerProps {
   video: {
     _id: string;
     videotitle: string;
     filepath: string;
   };
+
   onNext?: () => void;
   onShowComments?: () => void;
 }
@@ -55,6 +57,7 @@ export default function VideoPlayer({
   const hasShownLimitRef = useRef(false);
   const [watchedTimeTotal, setWatchedTimeTotal] = useState(0);
   const [showUpgradeDialog, setShowUpgradeDialog] = useState(false);
+
 
   const planLimits: Record<string, number> = {
     Free: 5,

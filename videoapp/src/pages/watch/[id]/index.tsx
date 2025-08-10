@@ -6,7 +6,9 @@ import axiosInstance from "@/lib/axiosinstance";
 import { useRouter } from "next/router";
 import React, { useEffect, useState, useRef } from "react";
 
+
 const WatchPage = () => {
+
   const commentsRef = useRef<HTMLDivElement | null>(null); 
   const router = useRouter();
   const { id } = router.query;
@@ -48,12 +50,10 @@ const WatchPage = () => {
       <div className="max-w-7xl mx-auto p-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-4">
-            {/* <Videoplayer video={currentVideo} 
-                    onNext={() => console.log("Go to next video")}
-  onShowComments={() => console.log("Show comments")}
-            />  */}
             <Videoplayer
+                     
                       video={currentVideo}
+                    
                       onNext={() => {
   const currentIndex = videoList.findIndex((v) => v._id === id);
   const nextIndex = (currentIndex + 1) % videoList.length;
