@@ -1,16 +1,16 @@
-import nodemailer from "nodemailer";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-});
+import nodemailer from "nodemailer";
+import sgTransport from "nodemailer-sendgrid";
+
+const transporter = nodemailer.createTransport(
+  sgTransport({
+    apiKey: process.env.SENDGRID_API_KEY,
+  })
+);
 
 export const sendInvoiceEmail = async (email, name, plan, amount) => {
   const mailOptions = {
-    from: process.env.MAIL_USER,
+    from: "mithlesh26cs071@satiengg.in",
     to: email,
     subject: "Your Subscription Invoice - YouTube Clone",
     html: `
@@ -50,3 +50,6 @@ export const sendInvoiceEmail = async (email, name, plan, amount) => {
 
   await transporter.sendMail(mailOptions);
 };
+
+
+//CQ4LHCV3XJDQU6CNEU62RJUW- Recovery Code

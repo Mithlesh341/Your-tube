@@ -23,7 +23,7 @@ import { Server } from "socket.io";
 import path from "path";
 import groupRoutes from "./routes/group.js";
 import messageroutes from "./routes/message.js"
-//import resetWatchTime from "./routes/resetWatchTime.js";
+
 
 dotenv.config();
 const app = express();
@@ -31,29 +31,9 @@ const app = express();
 
 
 const httpServer = createServer(app); 
-// const allowedOrigins = [
-//   "http://localhost:3000",                  // Local dev
-//   "https://vercel.com/mithlesh-mouryas-projects/frontend"   ,
-//   "https://frontend-hvwk.onrender.com"    
-// ];
 
-// const io = new Server(httpServer, {
-//   cors: {
-//     origin: allowedOrigins,
-//     methods: ["GET", "POST"],
-//     credentials: true
-//   },
-// });
-
-
-// app.use(cors({
-//   origin: allowedOrigins,
-//   credentials: true
-// }));
-
-//app.use(cors({ origin: "*", credentials: true }));
-//app.use(cors({origin : "http://localhost:3000", credentials:true}))
-app.use(cors({origin: "https://your-tube-blue.vercel.app", credentials: true}));
+app.use(cors({origin : "http://localhost:3000", credentials:true}))
+//app.use(cors({origin: "https://your-tube-blue.vercel.app", credentials: true}));
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use("/uploads", express.static(path.join("uploads")));
