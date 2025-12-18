@@ -37,20 +37,6 @@ function AppContent({ Component, pageProps }: AppProps) {
         </div>
       </div>
 
-      {/* Sign-In Modal */}
-      {/* <Dialog open={!loading && !user}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Sign in to continue</DialogTitle>
-            <DialogDescription>
-              You must be signed in to use this app.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex justify-center mt-4">
-            <Button onClick={handlegooglesignin}>Sign in with Google</Button>
-          </div>
-        </DialogContent>
-      </Dialog> */}
       <SignInDialog />
 
 

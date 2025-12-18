@@ -1,5 +1,32 @@
 import video from "../models/video.js";
 
+// export const uploadvideo = async (req, res) => {
+//   if (!req.file) {
+//     return res
+//       .status(400)
+//       .json({ message: "Please upload an MP4 video file only." });
+//   }
+
+//   try {
+//     const file = new video({
+//       videotitle: req.body.videotitle,
+//       filename: req.file.originalname,
+//       filepath: req.file.path, 
+//       filetype: req.file.mimetype,
+//       filesize: req.file.size,
+//       videochanel: req.body.videochanel,
+//       uploader: req.body.uploader,
+//     });
+
+//     await file.save();
+//     return res.status(201).json("File uploaded successfully to Cloudinary.");
+//   } catch (error) {
+//     console.error("Error:", error);
+//     return res.status(500).json({ message: "Something went wrong." });
+//   }
+// };
+
+
 export const uploadvideo = async (req, res) => {
   if (!req.file) {
     return res
@@ -11,11 +38,18 @@ export const uploadvideo = async (req, res) => {
     const file = new video({
       videotitle: req.body.videotitle,
       filename: req.file.originalname,
-      filepath: req.file.path, 
+      filepath: req.file.path,
       filetype: req.file.mimetype,
       filesize: req.file.size,
       videochanel: req.body.videochanel,
       uploader: req.body.uploader,
+
+      // ✅ Handle multiple categories
+      categories: req.body.categories 
+        ? Array.isArray(req.body.categories)
+          ? req.body.categories
+          : req.body.categories.split(",") // in case frontend sends comma-separated
+        : [],
     });
 
     await file.save();
@@ -25,6 +59,10 @@ export const uploadvideo = async (req, res) => {
     return res.status(500).json({ message: "Something went wrong." });
   }
 };
+
+
+
+
 
 export const getallvideo = async (req, res) => {
   try {

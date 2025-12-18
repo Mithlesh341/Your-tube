@@ -33,6 +33,14 @@ const userSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+ 
+  subscriptions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],  
+
 });
 
 export default mongoose.model("user", userSchema);

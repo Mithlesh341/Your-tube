@@ -1,17 +1,31 @@
-import CategoryTabs from "@/components/category-tabs";
-import Videogrid from "@/components/Videogrid";
+// import CategoryTabs from "@/components/category-tabs";
+// import Videogrid from "@/components/Videogrid";
+// import { Suspense } from "react";
+
+// export default function Home() {
+//   return (
+//     <main className="flex-1 p-4 overflow-y-auto">
+//       <CategoryTabs />
+      
+//        <Suspense fallback={<div>Loading videos...</div>}>
+//         <Videogrid />
+//       </Suspense>       
+      
+
+//     </main>
+//   );
+// }
+
+
+import HomePage from "@/components/HomePage";
 import { Suspense } from "react";
 
 export default function Home() {
   return (
     <main className="flex-1 p-4 overflow-y-auto">
-      <CategoryTabs />
-      
-       <Suspense fallback={<div>Loading videos...</div>}>
-        <Videogrid />
-      </Suspense>       
-      
-
+      <Suspense fallback={<div>Loading videos...</div>}>
+        <HomePage />
+      </Suspense>
     </main>
   );
 }

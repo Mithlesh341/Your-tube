@@ -44,7 +44,7 @@ const Sidebar = ({ onClose }: { onClose?: () => void }) => {
               Home
             </Button>
           </Link>
-          <Link href="/explore">
+          {/* <Link href="/explore">
             <Button
               variant="ghost"
               className="w-full justify-start cursor-pointer"
@@ -61,7 +61,7 @@ const Sidebar = ({ onClose }: { onClose?: () => void }) => {
               <PlaySquare className="w-5 h-5 mr-3" />
               Subscriptions
             </Button>
-          </Link>
+          </Link> */}
 
           {user && (
             <>

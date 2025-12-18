@@ -23,7 +23,7 @@ import { Server } from "socket.io";
 import path from "path";
 import groupRoutes from "./routes/group.js";
 import messageroutes from "./routes/message.js"
-
+import subscriberoutes from "./routes/subscribe.js"
 
 dotenv.config();
 const app = express();
@@ -34,8 +34,8 @@ const httpServer = createServer(app);
 
 app.use(cors({
   origin: [
-    "http://localhost:3000",            // local dev
-    "https://your-tube-blue.vercel.app" // deployed frontend
+    "http://localhost:3000",            
+    "https://your-tube-blue.vercel.app" 
   ],
   credentials: true
 }));
@@ -59,46 +59,7 @@ app.use("/subscription", subscriptionRoutes);
 app.use("/watchtime", updateWatchTimeRouter);
 app.use("/api", groupRoutes);
 app.use("/msg",messageroutes);
-//app.use("/watchtime", resetWatchTime);
-
-// WebSocket Logic
-// io.on("connection", (socket) => {
-//   console.log(" New client connected:", socket.id);
-
-//   socket.on("join-group", (groupId) => {
-//     socket.join(groupId);
-//     console.log(`👥 User ${socket.id} joined group ${groupId}`);
-//   });
-
-
-
-//   socket.on("send-message", async ({ groupId, sender, text }) => {
-//     try {
-//       const newMessage = new Message({
-//         groupId,
-//         sender,
-//         text,
-//       });
-//       await newMessage.save();
-
-//       io.to(groupId).emit("receive-message", {
-//         _id: newMessage._id,
-//         sender: newMessage.sender,
-//         text: newMessage.text,
-//         createdAt: newMessage.createdAt,
-//       });
-//     } catch (error) {
-//       console.error("Error saving message:", error);
-//     }
-//   });
-
-
-
-
-//   socket.on("disconnect", () => {
-//     console.log(" User disconnected:", socket.id);
-//   });
-// });
+app.use("/api/user", subscriberoutes);
 
 
 setupSocket(httpServer);
