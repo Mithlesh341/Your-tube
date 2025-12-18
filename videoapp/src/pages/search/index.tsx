@@ -15,7 +15,7 @@ const index = () => {
             </h1>
           </div>
         )}
-        <Suspense fallback={<div>Loading search results...</div>}>
+        <Suspense fallback={<div>Loading search results.........</div>}>
           <SearchResult query={q || ""} />
         </Suspense>
       </div>
