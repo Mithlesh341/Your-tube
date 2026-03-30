@@ -24,6 +24,13 @@ import path from "path";
 import groupRoutes from "./routes/group.js";
 import messageroutes from "./routes/message.js"
 import subscriberoutes from "./routes/subscribe.js"
+// import sgMail from "@sendgrid/mail";
+
+
+
+
+
+
 
 dotenv.config();
 const app = express();
@@ -31,6 +38,14 @@ const app = express();
 
 
 const httpServer = createServer(app); 
+//sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+// await sgMail.send({
+//   to: "your_email@gmail.com",
+//   from: "your_verified_email@gmail.com",
+//   subject: "Test",
+//   text: "Working?",
+// });
 
 app.use(cors({
   origin: [
@@ -61,7 +76,7 @@ app.use("/api", groupRoutes);
 app.use("/msg",messageroutes);
 app.use("/api/user", subscriberoutes);
 
-
+console.log("SENDGRID KEY:", process.env.SENDGRID_API_KEY);
 setupSocket(httpServer);
 
 const PORT = 5000;

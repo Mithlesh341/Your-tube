@@ -35,6 +35,44 @@ export const createOrder = async (req, res) => {
   }
 };
 
+// export const verifyPayment = async (req, res) => {
+//   const {
+//     razorpay_order_id,
+//     razorpay_payment_id,
+//     razorpay_signature,
+//     plan,
+//     userId,
+    
+//   } = req.body;
+
+//   const expectedSignature = crypto
+//     .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+//     .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+//     .digest("hex");
+
+//   if (expectedSignature !== razorpay_signature) {
+//     return res.status(400).json({ success: false, message: "Invalid signature" });
+//   }
+
+//   try {
+//     const user = await users.findById(userId);
+//     if (!user) return res.status(404).json({ error: "User not found" });
+
+//     user.plan = plan;
+//     user.watchTime = 0;
+//     user.planActivatedAt = new Date();
+//     await user.save();
+
+//     await sendInvoiceEmail(user.email, user.name, plan, PLAN_COSTS[plan]);
+
+//     res.status(200).json({ success: true, message: "Payment verified & plan updated" });
+//   } catch (err) {
+//     console.error("Verification error:", err);
+//     res.status(500).json({ success: false, message: "Could not verify payment" });
+//   }
+// };
+
+
 export const verifyPayment = async (req, res) => {
   const {
     razorpay_order_id,
@@ -42,8 +80,19 @@ export const verifyPayment = async (req, res) => {
     razorpay_signature,
     plan,
     userId,
-    
   } = req.body;
+
+  console.log("📦 BODY:", req.body);
+
+  if (!userId) {
+    console.log("❌ userId missing");
+    return res.status(400).json({ error: "Missing userId" });
+  }
+
+  if (!PLAN_COSTS[plan]) {
+    console.log("❌ Invalid plan:", plan);
+    return res.status(400).json({ error: "Invalid plan" });
+  }
 
   const expectedSignature = crypto
     .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
@@ -51,23 +100,33 @@ export const verifyPayment = async (req, res) => {
     .digest("hex");
 
   if (expectedSignature !== razorpay_signature) {
+    console.log("❌ Signature mismatch");
     return res.status(400).json({ success: false, message: "Invalid signature" });
   }
 
   try {
     const user = await users.findById(userId);
-    if (!user) return res.status(404).json({ error: "User not found" });
+    console.log("👤 USER:", user);
+
+    if (!user) {
+      console.log("❌ User not found");
+      return res.status(404).json({ error: "User not found" });
+    }
 
     user.plan = plan;
     user.watchTime = 0;
     user.planActivatedAt = new Date();
     await user.save();
 
-    await sendInvoiceEmail(user.email, user.name, plan, PLAN_COSTS[plan]);
+    try {
+      await sendInvoiceEmail(user.email, user.name, plan, PLAN_COSTS[plan]);
+    } catch (emailErr) {
+      console.error("❌ Email error:", emailErr);
+    }
 
-    res.status(200).json({ success: true, message: "Payment verified & plan updated" });
+    res.status(200).json({ success: true });
   } catch (err) {
-    console.error("Verification error:", err);
-    res.status(500).json({ success: false, message: "Could not verify payment" });
+    console.error("🔥 FULL ERROR:", err);
+    res.status(500).json({ success: false, message: err.message });
   }
 };
